@@ -18,8 +18,27 @@ class TarefaModel:
     tipo_atividade TEXT NOT NULL,
     descricao TEXT,
     data_prazo DATETIME NOT NULL,
-    status TEXT DEFAULT 'Pendente',
+    status TEXT DEFAULT 'Pendente'
     )
     """
         self.cursor.execute(query)
         self.conn.commit()
+
+    def adicionar_tarefa(self, materia, tipo_atividade, descricao, data_prazo):
+        try:
+            # O status começa como 'Pendente'
+            status = "Pendente"
+
+            # 1. A Query SQL usando placeholders (?) para segurança
+            query = "INSERT INTO tarefas (materia, tipo_atividade, descricao, data_prazo, status) VALUES (?, ?, ?, ?, ?)"
+
+            # 2. Executando e passando os valores como uma tupla
+            self.cursor.execute(query, (materia, tipo_atividade, descricao, data_prazo, status))
+
+            #. Confirmar a gravação no arquivo
+            self.conn.commit()
+
+            return True
+        except Exception as e:
+            print("Erro ao adicionar tarefa:", e)
+            return False
