@@ -1,0 +1,13 @@
+Passo Atual: Finalização do Model Acadêmico
+
+[x] Configuração Inicial: Criar classe e conexão com check_same_thread=False.
+
+[x] Criação da Tabela: Definir colunas de matéria, tipo, descrição, prazo e status.
+
+[ ] Método de Edição (Update): Criar função para alterar o status da tarefa (ex: de 'Pendente' para 'Concluída' ou 'Recuperação').
+
+[ ] Método de Exclusão (Delete): Criar função para remover tarefas antigas ou erradas.
+
+[ ] Lógica de Filtro: Criar uma função para buscar apenas tarefas de uma matéria específica (útil para quando o semestre estiver cheio).
+
+[ ] Validação de Datas: Adicionar uma verificação para garantir que o prazo inserido não seja uma data que já passou.
