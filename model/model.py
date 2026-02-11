@@ -10,6 +10,7 @@ class TarefaModel:
         self.cursor = self.conn.cursor()
         self.criar_tabela()
 
+    # FUNCIONALIDADES DO BANCO DE DADOS
     def criar_tabela(self):
         query = """
     CREATE TABLE IF NOT EXISTS tarefas(
@@ -23,6 +24,22 @@ class TarefaModel:
     """
         self.cursor.execute(query)
         self.conn.commit()
+
+
+    def listar_tarefas(self):
+        try:
+            # 1. Prepara a busca (SELECT * busca todas as colunas)
+            query = "SELECT * FROM tarefas"
+            self.cursor.execute(query)
+
+            # 2. Pega todos os resultados e transforma em uma lista do Python
+            tarefas = self.cursor.fetchall()
+
+            return tarefas
+
+        except Exception as e:
+            print("Erro ao listar tarefas:", e)
+            return []
 
     def adicionar_tarefa(self, materia, tipo_atividade, descricao, data_prazo):
         try:
