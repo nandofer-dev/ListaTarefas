@@ -59,3 +59,22 @@ class TarefaModel:
         except Exception as e:
             print("Erro ao adicionar tarefa:", e)
             return False
+        
+    def excluir_tarefa(self, tarefa_id):
+        try:
+            # 1. A Query SQL para deletar baseado no ID único.
+            query = "DELETE FROM tarefas WHERE id = ?"
+
+            # 2. Executa passando o ID da tarefa que deseja remover
+            self.cursor.execute(query, (tarefa_id,))
+
+            # 3. Confirma a remoção definitiva do banco
+            self.conn.commit()
+
+            if self.cursor.rowcount == 0:
+                print(f"[!] Aviso: Nenhuma tarefa encontrada com o ID {tarefa_id}")
+                return False
+            return True
+            
+        except Exception as e:
+            print("Erro ao excluir tarefa:", e)
