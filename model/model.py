@@ -78,3 +78,26 @@ class TarefaModel:
             
         except Exception as e:
             print("Erro ao excluir tarefa:", e)
+            return False
+
+    def atualizar_status(self, tarefa_id, status):
+        try:
+            # 1. A Query SQL para atualizar o status baseado no ID único.
+            query = "UPDATE tarefas SET status = ? WHERE id = ?"
+
+            # 2. Executa passando o ID da tarefa que deseja atualizar.
+            self.cursor.execute(query, (status, tarefa_id))
+
+            # 3. Confirma a atualização definitiva no banco.
+            self.conn.commit()
+
+            if self.cursor.rowcount == 0:
+                print(f"[!] Aviso: Nenhuma tarefa encontrada com o ID {tarefa_id}")
+                return False
+
+            return True
+        except Exception as e:
+            print("Erro ao atualizar tarefa.")
+            return False
+
+    
